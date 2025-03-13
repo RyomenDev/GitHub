@@ -169,3 +169,22 @@ GitHub is a platform for version control and collaboration. It allows developers
 GitHub is a powerful tool for software development. Mastering its features helps in efficient collaboration, version control, and automation.
 
 📌 Need more? Refer to the [GitHub Docs](https://docs.github.com/)
+
+---
+
+## 🔥 Additional Topics
+
+- Managing multiple remotes (`git remote add origin`)
+- Squashing commits (`git rebase -i HEAD~n`)
+- Stashing changes (`git stash`)
+- Using `.gitignore` effectively
+
+---
+
+## 📖 Additional Resources
+
+- [GitHub Docs](https://docs.github.com/)
+- [GitHub Learning Lab](https://lab.github.com/)
+- [Pro Git Book](https://git-scm.com/book/en/v2)
+
+# 🚀
