@@ -9,25 +9,22 @@ jobs:
       matrix:
         node-version: [14, 16, 18]
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm install
-      - run: npm test
       - name: Checkout Repository
         uses: actions/checkout@v3
       
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: ${{ matrix.node-version }}
 
       - name: Install Dependencies
         run: npm install
 
       - name: Run Tests
         run: npm test
+
+      - name: Build Project
+        run: npm run build  # Ensure your project has a build script
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
