@@ -1,32 +1,47 @@
-name: CI Pipeline
+name: MERN CI Pipeline
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4  # Use latest version
+        uses: actions/checkout@v3
 
-      - name: Set up Node.js (Use Latest LTS)
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: "npm"
+          cache: npm
 
+      # Install Client Dependencies
       - name: Install Client Dependencies
         working-directory: mern-ci-example/client
-        run: npm ci  # Faster and more reliable than npm install
+        run: |
+          npm ci
+          npm install crypto-browserify --save-dev
 
+      # Build Client (React + Vite)
       - name: Build Client
         working-directory: mern-ci-example/client
-        run: npx vite build  # Use npx to find Vite properly
+        env:
+          NODE_ENV: production
+        run: npm run build
 
+      # Install Server Dependencies
       - name: Install Server Dependencies
         working-directory: mern-ci-example/server
-        run: npm ci  # Ensures clean dependency install
+        run: npm ci
 
-      - name: Build Server
+      # Run Server (Node.js + Express)
+      - name: Start Server
         working-directory: mern-ci-example/server
-        run: npm run build
+        run: npm start &
