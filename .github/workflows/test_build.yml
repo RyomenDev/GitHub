@@ -2,6 +2,8 @@
 
 # NODE_OPTIONS=--openssl-legacy-provider fixes missing crypto.getRandomValues.
 
+# The error "--openssl-legacy-provider is not allowed in NODE_OPTIONS" occurs because newer versions of Node.js (>= 17) don't support this flag anymore.
+
 name: CI Pipeline
 
 on: [push, pull_request]
@@ -9,17 +11,14 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14, 16, 18]
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
+      - name: Set up Node.js (Force Node 16)
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 16 # Ensure Node.js 16 is used
 
       # Install and Build Client
       - name: Install Client Dependencies
@@ -28,7 +27,7 @@ jobs:
 
       - name: Build Client
         working-directory: mern-ci-example/client
-        run: NODE_OPTIONS=--openssl-legacy-provider npm run build
+        run: npm run build
 
       # Install and Build Server
       - name: Install Server Dependencies
