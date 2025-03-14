@@ -1,3 +1,7 @@
+# The error crypto$2.getRandomValues is not a function occurs because Vite relies on crypto.getRandomValues, which is missing in some Node.js environments (like GitHub Actions).
+
+# NODE_OPTIONS=--openssl-legacy-provider fixes missing crypto.getRandomValues.
+
 name: CI Pipeline
 
 on: [push, pull_request]
@@ -24,7 +28,7 @@ jobs:
 
       - name: Build Client
         working-directory: mern-ci-example/client
-        run: npm run build
+        run: NODE_OPTIONS=--openssl-legacy-provider npm run build
 
       # Install and Build Server
       - name: Install Server Dependencies
