@@ -25,12 +25,14 @@ jobs:
 
       - name: Build Client
         run: |
+          cd mern-ci-example
           cd client
           npm run build
 
       # Build Server
       - name: Install Server Dependencies
         run: |
+          cd mern-ci-example
           cd server
           npm install
 
