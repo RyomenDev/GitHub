@@ -17,9 +17,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      # Build Client
+      # Install and Build Client
       - name: Install Client Dependencies
         run: |
+          cd mern-ci-example
           cd client
           npm install
 
@@ -29,7 +30,7 @@ jobs:
           cd client
           npm run build
 
-      # Build Server
+      # Install and Build Server
       - name: Install Server Dependencies
         run: |
           cd mern-ci-example
@@ -38,5 +39,6 @@ jobs:
 
       - name: Build Server
         run: |
+          cd mern-ci-example
           cd server
           npm run build
