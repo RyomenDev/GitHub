@@ -18,7 +18,7 @@ jobs:
       - name: Set up Node.js (Force Node 16)
         uses: actions/setup-node@v3
         with:
-          node-version: 16 # Ensure Node.js 16 is used
+          node-version: 18 # Ensure Node.js 16 is used
 
       - name: Install Client Dependencies
         working-directory: mern-ci-example/client
