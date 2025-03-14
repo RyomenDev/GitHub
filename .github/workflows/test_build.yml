@@ -20,16 +20,19 @@ jobs:
         with:
           node-version: 16 # Ensure Node.js 16 is used
 
-      # Install and Build Client
       - name: Install Client Dependencies
         working-directory: mern-ci-example/client
         run: npm install
 
       - name: Build Client
         working-directory: mern-ci-example/client
-        run: npm run build
+        env:
+          NODE_ENV: production
+          NODE_OPTIONS: --experimental-fetch # Ensure crypto API works
+        run: |
+          npm install crypto-browserify --save-dev
+          npm run build
 
-      # Install and Build Server
       - name: Install Server Dependencies
         working-directory: mern-ci-example/server
         run: npm install
@@ -37,3 +40,4 @@ jobs:
       - name: Build Server
         working-directory: mern-ci-example/server
         run: npm run build
+
