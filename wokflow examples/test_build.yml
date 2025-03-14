@@ -19,18 +19,22 @@ jobs:
 
       # Install and Build Client
       - name: Install Client Dependencies
-        working-directory: mern-ci-example/client
-        run: npm install
+        run: |
+          cd client
+          npm install
 
       - name: Build Client
-        working-directory: mern-ci-example/client
-        run: npm run build
+        run: |
+          cd client
+          npm run build
 
       # Install and Build Server
       - name: Install Server Dependencies
-        working-directory: mern-ci-example/server
-        run: npm install
+        run: |
+          cd server
+          npm install
 
       - name: Build Server
-        working-directory: mern-ci-example/server
-        run: npm run build
+        run: |
+          cd server
+          npm run build
