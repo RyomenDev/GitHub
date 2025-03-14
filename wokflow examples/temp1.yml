@@ -1,0 +1,43 @@
+# The error crypto$2.getRandomValues is not a function occurs because Vite relies on crypto.getRandomValues, which is missing in some Node.js environments (like GitHub Actions).
+
+# NODE_OPTIONS=--openssl-legacy-provider fixes missing crypto.getRandomValues.
+
+# The error "--openssl-legacy-provider is not allowed in NODE_OPTIONS" occurs because newer versions of Node.js (>= 17) don't support this flag anymore.
+
+name: CI Pipeline
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js (Force Node 16)
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18 
+
+      - name: Install Client Dependencies
+        working-directory: mern-ci-example/client
+        run: npm install
+
+      - name: Build Client
+        working-directory: mern-ci-example/client
+        env:
+          NODE_ENV: production
+          NODE_OPTIONS: --experimental-fetch # Ensure crypto API works
+        run: |
+          npm install crypto-browserify --save-dev
+          npm run build
+
+      - name: Install Server Dependencies
+        working-directory: mern-ci-example/server
+        run: npm install
+
+      - name: Build Server
+        working-directory: mern-ci-example/server
+        run: npm run build
+
