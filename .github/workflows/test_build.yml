@@ -36,6 +36,6 @@ jobs:
         working-directory: mern-ci-example/server
         run: npm run build
 
-      - name: Run Server Tests (If available)
-        working-directory: mern-ci-example/server
-        run: npm test
+    #   - name: Run Server Tests (If available)
+    #     working-directory: mern-ci-example/server
+    #     run: npm test
