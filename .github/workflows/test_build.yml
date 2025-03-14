@@ -1,17 +1,10 @@
-name: MERN CI Pipeline
+name: CI Pipeline
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: [push, pull_request]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -21,27 +14,28 @@ jobs:
         with:
           node-version: 18
           cache: npm
+          cache-dependency-path: |
+            mern-ci-example/client/package-lock.json
+            mern-ci-example/server/package-lock.json
 
-      # Install Client Dependencies
       - name: Install Client Dependencies
         working-directory: mern-ci-example/client
-        run: |
-          npm ci
-          npm install crypto-browserify --save-dev
+        run: npm ci
 
-      # Build Client (React + Vite)
       - name: Build Client
         working-directory: mern-ci-example/client
         env:
           NODE_ENV: production
         run: npm run build
 
-      # Install Server Dependencies
       - name: Install Server Dependencies
         working-directory: mern-ci-example/server
         run: npm ci
 
-      # Run Server (Node.js + Express)
-      - name: Start Server
+      - name: Build Server (Optional)
         working-directory: mern-ci-example/server
-        run: npm start &
+        run: npm run build
+
+      - name: Run Server Tests (If available)
+        working-directory: mern-ci-example/server
+        run: npm test
