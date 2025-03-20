@@ -110,6 +110,49 @@ Have you checked the documentation, previous issues, or other sources?
 Provide any additional details or context.
 ```
 
+# 🚀
+
+## Using Multiple Templates
+
+If you have multiple templates, GitHub will allow users to choose a template when opening an issue.
+
+For further customization, you can add an `ISSUE_TEMPLATE/config.yml` file to define default issue labels, assignees, etc.
+
+**Here’s a `config.yml `file in Markdown format explaining how to set it up:**
+
+```yml
+# .github/ISSUE_TEMPLATE/config.yml
+
+blank_issues_enabled: false # Prevents users from creating blank issues
+contact_links:
+  - name: 💬 Community Discussion
+    url: https://github.com/YOUR-REPO/discussions
+    about: Ask questions, request features, or discuss ideas here.
+  - name: 📖 Documentation
+    url: https://github.com/YOUR-REPO/wiki
+    about: Check the documentation before opening an issue.
+  - name: 🚀 Feature Requests
+    url: https://github.com/YOUR-REPO/issues/new?template=feature_request.md
+    about: Request a new feature or improvement.
+  - name: 🛠️ Bug Reports
+    url: https://github.com/YOUR-REPO/issues/new?template=bug_report.md
+    about: Report a bug with detailed information.
+```
+
+### How to Use It?
+
+**1. Create the `.github/ISSUE_TEMPLATE` directory** if it doesn't exist.
+**2. Inside this directory**, create a `config.yml` file.
+**3. Copy and paste** the above content into `config.yml`.
+**4. Push the file to GitHub.**
+
+### What Does This Do?
+
+- ✅ **Disables blank issues** (users must select a template).
+- ✅ **Provides alternative resources** (like discussions and documentation).
+
+# 🚀
+
 ```
 
 ```
