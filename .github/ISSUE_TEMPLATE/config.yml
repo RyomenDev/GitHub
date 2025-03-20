@@ -1,0 +1,16 @@
+# .github/ISSUE_TEMPLATE/config.yml
+
+blank_issues_enabled: true  # if False Prevents users from creating blank issues
+contact_links:
+  - name: 💬 Community Discussion
+    url: https://github.com/YOUR-REPO/discussions
+    about: Ask questions, request features, or discuss ideas here.
+  - name: 📖 Documentation
+    url: https://github.com/YOUR-REPO/wiki
+    about: Check the documentation before opening an issue.
+  - name: 🚀 Feature Requests
+    url: https://github.com/YOUR-REPO/issues/new?template=feature_request.md
+    about: Request a new feature or improvement.
+  - name: 🛠️ Bug Reports
+    url: https://github.com/YOUR-REPO/issues/new?template=bug_report.md
+    about: Report a bug with detailed information.
